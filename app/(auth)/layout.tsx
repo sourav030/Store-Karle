@@ -11,7 +11,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
             alt="logo"
             height={224}
             width={82}
-            className="h-auto"
+            className="h-auto w-[200px] lg:w-[250px]"
           />
           <div className="space-y-5 text-white">
             <h1 className="h1">Manage your files the best way</h1>
