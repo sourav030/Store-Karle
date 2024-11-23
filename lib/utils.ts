@@ -181,6 +181,8 @@ export const constructFileUrl = (bucketFileId: string) => {
 
 export const constructDownloadUrl = (bucketFileId: string) => {
   return `${process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT}/storage/buckets/${process.env.NEXT_PUBLIC_APPWRITE_BUCKET}/files/${bucketFileId}/download?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT}`;
+
+  // https://cloud.appwrite.io/v1/storage/buckets/672f8c8a002b3f415531/files/6741a5f0001f00f7fa57/view?project=672f8946000afa2dd6e9
 };
 
 // DASHBOARD UTILS

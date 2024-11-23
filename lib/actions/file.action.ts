@@ -6,8 +6,8 @@ import { appwriteConfig } from "@/lib/appwrite/config";
 import { ID, Models, Query } from "node-appwrite";
 import { constructFileUrl, getFileType, parseStringify } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
-import { getCurrentUser } from "./user.action";
 import { DeleteFileProps, FileType, GetFilesProps, RenameFileProps, UpdateFileUsersProps, UploadFileProps } from "@/types";
+import { getCurrentUser } from "./user.action";
 
 const handleError = (error: unknown, message: string) => {
   console.log(error, message);
@@ -42,7 +42,7 @@ export const uploadFile = async ({
       users: [],
       bucketFileId: bucketFile.$id,
     };
-    
+
     const newFile = await databases
       .createDocument(
         appwriteConfig.databaseId,
@@ -111,8 +111,7 @@ export const getFiles = async ({
       appwriteConfig.filesCollectionId,
       queries,
     );
-
-    console.log({ files });
+    
     return parseStringify(files);
   } catch (error) {
     handleError(error, "Failed to get files");
@@ -194,7 +193,6 @@ export const deleteFile = async ({
   }
 };
 
-// ============================== TOTAL FILE SPACE USED
 export async function getTotalSpaceUsed() {
   try {
     const { databases } = await createSessionClient();
