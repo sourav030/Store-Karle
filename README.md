@@ -35,6 +35,9 @@ To set up the application locally, follow the steps below:
 git clone https://github.com/yourusername/store-karle.git
 cd store-karle
 ```
+
+---
+
 ### 2. Install Dependencies
 
 - Install the required dependencies using npm
@@ -43,6 +46,8 @@ npm install
 # or
 npm i
 ```
+
+---
 
 ### 3. Setup Appwrite
 
@@ -57,6 +62,8 @@ npm i
   
 **Get Your Appwrite Credentials:**
 - Copy your Project ID, API Key, and other credentials from the Appwrite console.
+
+---
 
 ### 4. Environment Variables
 - Create a .env.local file at the root of your project and add the following configuration, based on the env.example file:
@@ -73,6 +80,8 @@ NEXT_APPWRITE_SECRET=<YOUR SECRET KEY>
 
 **Note:** Make sure to replace the placeholder values with the actual ones from your Appwrite console.
 
+---
+
 ### 5. Run The Developement Server
 -Once everything is set up, start the development server:
 
@@ -87,5 +96,7 @@ npm run dev
 - Commit your changes (git commit -am 'Add new feature').
 - Push to the branch (git push origin feature-name).
 - Create a pull request.
+
+---
 
 ### INITIAL UPDATE OF THIS PROJECT ARE INSPIRED OR COPIED FROM JS MASTERY, ALL CREDIT GOES TO THEM.
