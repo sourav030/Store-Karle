@@ -1,5 +1,5 @@
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
