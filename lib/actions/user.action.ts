@@ -1,9 +1,9 @@
 "use server";
 
-import { createAdminClient, createSessionClient } from "../appwrite";
-import { appwriteConfig } from "../appwrite/config";
-import { ID, Query } from "node-appwrite";
-import { parseStringify } from "../utils";
+import { createAdminClient, createSessionClient } from "@/lib/appwrite";
+import { appwriteConfig } from "@/lib/appwrite/config";
+import { Query, ID } from "node-appwrite";
+import { parseStringify } from "@/lib/utils";
 import { cookies } from "next/headers";
 import { avatarPlaceholderUrl } from "@/constants";
 import { redirect } from "next/navigation";
@@ -14,8 +14,9 @@ const getUserByEmail = async (email: string) => {
   const result = await databases.listDocuments(
     appwriteConfig.databaseId,
     appwriteConfig.usersCollectionId,
-    [Query.equal("email", [email])]
+    [Query.equal("email", [email])],
   );
+
   return result.total > 0 ? result.documents[0] : null;
 };
 
@@ -24,11 +25,12 @@ const handleError = (error: unknown, message: string) => {
   throw error;
 };
 
-export const sendEmailOtp = async ({ email }: { email: string }) => {
+export const sendEmailOTP = async ({ email }: { email: string }) => {
   const { account } = await createAdminClient();
 
   try {
     const session = await account.createEmailToken(ID.unique(), email);
+
     return session.userId;
   } catch (error) {
     handleError(error, "Failed to send email OTP");
@@ -44,11 +46,8 @@ export const createAccount = async ({
 }) => {
   const existingUser = await getUserByEmail(email);
 
-  const accountId = await sendEmailOtp({ email });
-
-  if (!accountId) {
-    throw new Error("Failed to send an OTP");
-  }
+  const accountId = await sendEmailOTP({ email });
+  if (!accountId) throw new Error("Failed to send an OTP");
 
   if (!existingUser) {
     const { databases } = await createAdminClient();
@@ -62,9 +61,10 @@ export const createAccount = async ({
         email,
         avatar: avatarPlaceholderUrl,
         accountId,
-      }
+      },
     );
   }
+
   return parseStringify({ accountId });
 };
 
@@ -77,6 +77,7 @@ export const verifySecret = async ({
 }) => {
   try {
     const { account } = await createAdminClient();
+
     const session = await account.createSession(accountId, password);
 
     (await cookies()).set("appwrite-session", session.secret, {
@@ -101,14 +102,14 @@ export const getCurrentUser = async () => {
     const user = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.usersCollectionId,
-      [Query.equal("accountId", result.$id)]
+      [Query.equal("accountId", result.$id)],
     );
 
     if (user.total <= 0) return null;
 
     return parseStringify(user.documents[0]);
   } catch (error) {
-    handleError(error, "Failed to get current user");
+    console.log(error);
   }
 };
 
@@ -129,8 +130,9 @@ export const signInUser = async ({ email }: { email: string }) => {
   try {
     const existingUser = await getUserByEmail(email);
 
+    // User exists, send OTP
     if (existingUser) {
-      await sendEmailOtp({ email });
+      await sendEmailOTP({ email });
       return parseStringify({ accountId: existingUser.accountId });
     }
 
@@ -139,15 +141,3 @@ export const signInUser = async ({ email }: { email: string }) => {
     handleError(error, "Failed to sign in user");
   }
 };
-
-/*
-    # Create Account Flow
-
-    1. Users enters full name and email
-    2. Check if the user already exist using the email
-    3. Send OTP to user's email
-    4. This will send a secret key for creating a session
-    5. Create a new user document if the user is new user
-    6. Return the user's accountId that will be used to complete the login
-    7. Verify OTP and authenticate to login
-*/
