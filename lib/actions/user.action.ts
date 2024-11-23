@@ -83,11 +83,9 @@ export const verifySecret = async ({
     (await cookies()).set("appwrite-session", session.secret, {
       path: "/",
       httpOnly: true,
-      sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
-      secure: process.env.NODE_ENV === "production",
-      domain: process.env.COOKIE_DOMAIN || "storage-management-three.vercel.app", 
+      sameSite: "strict",
+      secure: true,
     });
-    
 
     return parseStringify({ sessionId: session.$id });
   } catch (error) {
