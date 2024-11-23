@@ -1,13 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Models } from "node-appwrite";
-
 import ActionDropdown from "@/components/ActionDropdown";
-
-
-
 import { Separator } from "@/components/ui/separator";
-
 import { convertFileSize, getUsageSummary } from "@/lib/utils";
 import { getFiles, getTotalSpaceUsed } from "@/lib/actions/file.action";
 import { Chart } from "@/components/Chart";
