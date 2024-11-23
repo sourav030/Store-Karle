@@ -70,6 +70,7 @@ NEXT_PUBLIC_APPWRITE_FILES_COLLECTION=<YOUR FILES COLLECTION ID>
 NEXT_PUBLIC_APPWRITE_BUCKET=<YOUR BUCKET ID>
 NEXT_APPWRITE_SECRET=<YOUR SECRET KEY>
 ```
+
 **Note:** Make sure to replace the placeholder values with the actual ones from your Appwrite console.
 
 ### 5. Run The Developement Server
