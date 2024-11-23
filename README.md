@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# STORE KARLE
+
+**STORE KARLE** is a cloud storage application that allows users to store files on the cloud (similar to Google Drive) with a storage limit of 2GB. This application is built using **Next.js**, styled with **Tailwind CSS** and **SHADCN**, and uses **Appwrite** for the database and backend services.
+
+---
+
+## Features
+
+- Upload and store files up to 2GB on the cloud.
+- User authentication and management via Appwrite.
+- Responsive UI with modern design using Tailwind CSS.
+- Cloud storage that syncs seamlessly across devices.
+
+---
+
+## Tech Stack
+
+- **Frontend:** Next.js, Tailwind CSS, ShadCN
+- **Backend:** Appwrite (for file storage, authentication, and database)
+- **Database:** Appwrite
+- **Authentication:** Appwrite Auth (Email & OTP)
+
+---
 
 ## Getting Started
 
-First, run the development server:
+To set up the application locally, follow the steps below:
+
+### 1. Fork & Clone the Repository
+
+- Fork this repository to your GitHub account.
+- Clone the forked repository to your local machine:
 
 ```bash
-npm run dev
+git clone https://github.com/yourusername/store-karle.git
+cd store-karle
+```
+### 2. Install Dependencies
+
+- Install the required dependencies using npm
+```
+npm install
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm i
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Setup Appwrite
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Create an Appwrite Project:**
+- Go to Appwrite Console, sign up, and create a new project.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**Set Up Cloud Storage:**
+- Enable and configure the storage feature in Appwrite.
+  
+**Set Up Authentication:**
+- Enable email/otp authentication in the Appwrite console.
+  
+**Get Your Appwrite Credentials:**
+- Copy your Project ID, API Key, and other credentials from the Appwrite console.
 
-## Learn More
+### 4. Environment Variables
+- Create a .env.local file at the root of your project and add the following configuration, based on the env.example file:
 
-To learn more about Next.js, take a look at the following resources:
+```
+NEXT_PUBLIC_APPWRITE_ENDPOINT="https://cloud.appwrite.io/v1"
+NEXT_PUBLIC_APPWRITE_PROJECT=<YOUR PROJECT ID>
+NEXT_PUBLIC_APPWRITE_DATABASE=<YOUR DATABASE ID>
+NEXT_PUBLIC_APPWRITE_USERS_COLLECTION=<YOUR USER COLLECTION ID>
+NEXT_PUBLIC_APPWRITE_FILES_COLLECTION=<YOUR FILES COLLECTION ID>
+NEXT_PUBLIC_APPWRITE_BUCKET=<YOUR BUCKET ID>
+NEXT_APPWRITE_SECRET=<YOUR SECRET KEY>
+```
+**Note:** Make sure to replace the placeholder values with the actual ones from your Appwrite console.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 5. Run The Developement Server
+-Once everything is set up, start the development server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+npm run dev
+```
 
-## Deploy on Vercel
+# Contributing #
+- Fork the repository.
+- Create a new branch (git checkout -b feature-name).
+- Make your changes.
+- Commit your changes (git commit -am 'Add new feature').
+- Push to the branch (git push origin feature-name).
+- Create a pull request.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### INITIAL UPDATE OF THIS PROJECT ARE INSPIRED OR COPIED FROM JS MASTERY, ALL CREDIT GOES TO THEM.
